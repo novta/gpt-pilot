@@ -7,7 +7,7 @@ const Login = () => {
   const handleLogin = (e) => {
     e.preventDefault();
     // INPUT_REQUIRED {Handle the login logic here}
-    fetch('/login', {
+    fetch('http://localhost:3000/login', {
      method: 'POST',
      headers: {
        'Content-Type': 'application/json',
@@ -21,6 +21,7 @@ const Login = () => {
      if (!response.ok) {
        throw new Error(`HTTP error! status: ${response.status}`);
      } else {
+       debugger;
        return response.json();
      }
    })

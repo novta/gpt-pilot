@@ -1,29 +1,33 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 
 const Register = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-
+  const history = useHistory();
   const handleRegister = (e) => {
     e.preventDefault();
     // INPUT_REQUIRED {Handle the registration logic here}
-    fetch('/register', {
-     method: 'POST',
-     headers: {
-       'Content-Type': 'application/json',
-     },
-     body: JSON.stringify({
-       email: email,
-       password: password
-     }),
-   })
-   .then(response => {
-     if (!response.ok) {
-       throw new Error(`HTTP error! status: ${response.status}`);
-     } else {
-       return response.json();
-     }
-   })
+    fetch('http://localhost:3000/register', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        email: email,
+        password: password
+      }),
+    })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        } else {
+          return response.json();
+        }
+      })
+      .then(data => {
+        history.push('/login');
+      })
   };
 
   return (
